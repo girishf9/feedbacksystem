@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Feedback Comparison Overview</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Feedback Comparison Table</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Contributor</th>
+                    <th>Commentary</th>
+                    <th>Liked (%)</th>
+                    <th>Disliked (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category, entries in category_map.items() %}
+                    {% for entry in entries %}
+                        <tr>
+                            <td>{{ entry['category'] }}</td>
+                            <td>{{ entry['name'] }}</td>
+                            <td>{{ entry['feedback'] }}</td>
+                            <td>{{ entry['liked'] }}%</td>
+                            <td>{{ entry['disliked'] }}%</td>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn btn-primary">Return to Home</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

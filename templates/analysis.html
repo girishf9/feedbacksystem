@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Feedback Data Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Analytical Review of Feedback</h1>
+        <canvas id="analysisChart" width="800" height="400"></canvas>
+        <a href="/" class="btn btn-primary mt-3">Return to Homepage</a>
+    </div>
+    <script>
+        var context = document.getElementById('analysisChart').getContext('2d');
+        var positiveFeedbackData = {{ liked_data_json | safe }};
+        var negativeFeedbackData = {{ disliked_data_json | safe }};
+        var analysisChart = new Chart(context, {
+            type: 'bar',
+            data: {
+                labels: ['Student', 'Parent', 'Teacher', 'Online Class', 'Normal Class'],
+                datasets: [
+                    {
+                        label: 'Liked Percentage',
+                        data: positiveFeedbackData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Disliked Percentage',
+                        data: negativeFeedbackData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                responsive: false,
+                maintainAspectRatio: false
+            }
+        });
+    </script>
+</body>
+</html>
